@@ -15,19 +15,19 @@
           <ul class="nav navbar-nav">
             <li><a href="/gerencia">Usuarios</a></li>
             <li><a href="/gerencia/secciones">Secciones</a></li>
-            
-            
+
+
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            
-            
+
+
             <li><a href="#">Salir</a></li>
           </ul>
         </div>
       </div>
     </nav>
 	{{>Template.dynamic template=contenido}}
-	
+
 
 </template>
 
@@ -59,14 +59,14 @@
   			</div>
   			<div class="form-group">
   				<label for="sel1">Roles</label>
-      			<select class="form-control" id="sel1">
+      			<select class="form-control" id="tipo">
         			<option>Administrador</option>
         			<option>rol 2</option>
         			<option>rol 3</option>
         			<option>rol 4</option>
       			</select>
   			</div>
-  			<button type="submit" class="btn btn-default">Registrar</button>
+  			<button type="submit" id="existente" class="btn btn-default">Registrar</button>
 		</form>
     </div>
     <div id="menu1" class="tab-pane fade">
@@ -74,17 +74,17 @@
     	<form>
   			<div class="form-group">
     			<label for="email">Email</label>
-    			<input id="email" type="email" class="form-control" name="email">
+    			<input id="email" type="email" class="form-control" name="email2">
   			</div>
   			<div class="form-group">
     			<label for="pwd">Contraseña</label>
-    			<input type="password" class="form-control" id="pwd">
+    			<input type="password" name="password2" class="form-control" id="pwd">
   			</div>
   			<div class="form-group">
   				<label for="usr">Nuevo rol</label>
-  				<input type="text" class="form-control" id="usr">
+  				<input type="text" name="rol" class="form-control" id="usr">
   			</div>
-  			<button type="submit" class="btn btn-default">Registrar</button>
+  			<button type="submit" id="noexistente" class="btn btn-default">Registrar</button>
 		</form>
     </div>
   </div>
@@ -95,29 +95,23 @@
 <template name="listaDeUsuarios">
 <div class="container">
   <h2>Usuarios</h2>
-  <p>Lista de usuarios con sus respectivos roles:</p>                                                                                      
-  <div class="table-responsive">          
+  <p>Lista de usuarios con sus respectivos roles:</p>
+  <div class="table-responsive">
   <table class="table">
     <thead>
       <tr>
         <th>Email</th>
         <th>Rol</th>
-        
+
       </tr>
     </thead>
     <tbody>
+      {{#each usuarios}}
       <tr>
-        <td>daniel@grupoddv.com</td>
-        <td>Administrador</td>    
+        <td>{{email}}</td>
+        <td>{{tipo}}</td>
       </tr>
-      <tr>
-        <td>ana@grupoddv.com</td>
-        <td>Rol 1</td>    
-      </tr>
-      <tr>
-        <td>mariel@grupoddv.com</td>
-        <td>Rol 2</td>    
-      </tr>
+      {{/usuarios}}
     </tbody>
   </table>
   </div>
@@ -162,32 +156,47 @@
 <template name="ListaDeSecciones">
 <div class="container">
   <h2>Secciones</h2>
-  <p>Lista de secciones con sus respectivos roles:</p>                                                                                      
-  <div class="table-responsive">          
+  <p>Lista de secciones con sus respectivos roles:</p>
+  <div class="table-responsive">
   <table class="table">
     <thead>
       <tr>
         <th>Seccion</th>
         <th>Rol</th>
-        
+
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>Seguridad</td>
-        <td>Rol 1</td>    
+        <td>Rol 1</td>
       </tr>
       <tr>
         <td>Calidad</td>
-        <td>Rol 2</td>    
+        <td>Rol 2</td>
       </tr>
       <tr>
         <td>Medio ambiente</td>
-        <td>Rol 2</td>    
+        <td>Rol 2</td>
       </tr>
     </tbody>
   </table>
   </div>
 </div>
 
+</template>
+
+<template name="registro">
+  <form>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" type="email" class="form-control" name="email">
+        </div>
+        <div class="form-group">
+          <label for="pwd">Contraseña</label>
+          <input type="password" name="password" class="form-control" id="pwd">
+        </div>
+
+        <button type="submit" class="btn btn-default">Registrar</button>
+    </form>
 </template>
