@@ -1,5 +1,5 @@
 <template name="Administrador">
-	 <!-- Static navbar -->
+	{{#if isInRole 'admin' 'default-group'}}
     <nav class="navbar navbar-default navbar-static-top">
       <div class="container">
         <div class="navbar-header">
@@ -27,8 +27,29 @@
       </div>
     </nav>
 	{{>Template.dynamic template=contenido}}
+	{{else}}
+		{{>loginAdmin}}
+	{{/if}}
 
 
+</template>
+
+<template name="loginAdmin">
+	<div class="container">
+		<div class="col-md-12">
+			<form>
+				<div class="form-group">
+    				<label for="email">Email</label>
+    				<input id="email" type="email" class="form-control" name="email">
+  				</div>
+  				<div class="form-group">
+    				<label for="pwd">Contraseña</label>
+    				<input type="password" name="password" class="form-control" id="pwd">
+  				</div>
+  				<button type="submit" id="existente" class="btn btn-default">Entrar</button>
+			</form>
+		</div>
+	</div>
 </template>
 
 <template name="usuarios">
@@ -55,17 +76,17 @@
   			</div>
   			<div class="form-group">
     			<label for="pwd">Contraseña</label>
-    			<input type="password" class="form-control" id="pwd">
+    			<input type="password" name="password" class="form-control" id="pwd">
   			</div>
   			<div class="form-group">
   				<label for="sel1">Roles</label>
       			<select class="form-control" id="tipo">
-        			<option>Administrador</option>
-        			<option>rol 2</option>
-        			<option>rol 3</option>
-        			<option>rol 4</option>
+        			{{#each tipos}}
+						<option value="{{this._id}}">{{this.nombre}}</option>
+        			{{/each}}
       			</select>
   			</div>
+
   			<button type="submit" id="existente" class="btn btn-default">Registrar</button>
 		</form>
     </div>
@@ -111,7 +132,7 @@
         <td>{{email}}</td>
         <td>{{tipo}}</td>
       </tr>
-      {{/usuarios}}
+      {{/each}}
     </tbody>
   </table>
   </div>
@@ -127,8 +148,16 @@
 
 <template name="FormularioSeccion">
 	<div class="container">
-		<div class="col-md-12">
-			<h3>Agregar seccion</h3>
+		
+			<h3>Secciones</h3>
+			<ul class="nav nav-tabs">
+    		<li class="active"><a data-toggle="tab" href="#home">Agregar nueva sección</a></li>
+    		<li><a data-toggle="tab" href="#menu1">Agregar contenido</a></li>
+   		</ul>
+    	
+		  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      	<h3>Agregar nueva sección</h3>
     	<form>
   			<div class="form-group">
     			<label for="seccion">Nombre</label>
@@ -136,20 +165,54 @@
   			</div>
   			<div class="form-group">
     			<label for="descripción">Descripción</label>
-    			<input type="text" name="descripción" class="form-control" id="descripción">
+    			<input type="text" name="descripcion" class="form-control" id="descripción">
+  			</div>
+  			<div class="form-group">
+  				<div id="cp3" class="input-group colorpicker-component">
+    				<input type="text" value="#00AABB" name="color" id="color" class="form-control color" />
+    				<span class="input-group-addon"><i></i></span>
+				</div>
   			</div>
   			<div class="form-group">
   				<label for="sel1">Roles asociados</label>
-      			<select class="form-control" id="sel1">
-        			<option>Administrador</option>
-        			<option>rol 2</option>
-        			<option>rol 3</option>
-        			<option>rol 4</option>
+      			<select class="form-control" id="tipo">
+        			{{#each tipos}}
+						<option value="{{this._id}}">{{this.nombre}}</option>
+        			{{/each}}
       			</select>
   			</div>
   			<button type="submit" class="btn btn-default">Registrar</button>
 		</form>
-		</div>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+    	<h3>Agregar contenido</h3>
+    	<form>
+  			<div class="form-group">
+    			<label for="seccion">Titulo</label>
+    			<input id="seccion" type="text" class="form-control" name="titulo">
+  			</div>
+  			<div class="form-group">
+    			<label for="descripción">Contenido</label>
+    			<textarea class="form-control" rows="5" id="contenido"></textarea>
+  			</div>
+  			<div class="form-group">
+  				<label for="archivo">Adjuntar foto o video</label>
+  				<input type="file" id="myArchivo">
+  			</div>
+  			<div class="form-group">
+  				<label for="sel1">Sección asociada</label>
+      			<select class="form-control" id="seccio">
+        			{{#each secciones}}
+						<option value="{{this._id}}">{{this.nombre}}</option>
+        			{{/each}}
+      			</select>
+  			</div>
+  			<button type="submit" id="agregar-contenido" class="btn btn-default">Agregar</button>
+		</form>
+    </div>
+  </div>
+    	
+	
 	</div>
 </template>
 
@@ -167,18 +230,12 @@
       </tr>
     </thead>
     <tbody>
+      {{#each secciones}}
       <tr>
-        <td>Seguridad</td>
-        <td>Rol 1</td>
+        <td>{{nombre}}</td>
+        <td>{{tipo}}</td>
       </tr>
-      <tr>
-        <td>Calidad</td>
-        <td>Rol 2</td>
-      </tr>
-      <tr>
-        <td>Medio ambiente</td>
-        <td>Rol 2</td>
-      </tr>
+     {{/each}}
     </tbody>
   </table>
   </div>

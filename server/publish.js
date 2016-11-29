@@ -25,8 +25,9 @@ Meteor.publish('secciones', function () {
 	}
 });
 
-Meteor.publish('seccionesxtipo', function (tipoId) {
+Meteor.publish('seccionesxtipo', function () {
 	if (this.userId) {
+		let tipoId = Meteor.users.findOne({_id: this.userId}).profile.tipoId;
 		return Secciones.find({tipoId: tipoId});
 	} else {
 		this.stop();
@@ -36,7 +37,16 @@ Meteor.publish('seccionesxtipo', function (tipoId) {
 
 Meteor.publish('subsecciones', function (seccionId) {
 	if (this.userId) {
-		return Subsecciones.find({seccionId: seccionId});
+		return Subseccion.find({seccionId: seccionId});
+	} else {
+		this.stop();
+		return;
+	}
+});
+
+Meteor.publish('archivos', function () {
+	if (this.userId) {
+		return Archivos.find();
 	} else {
 		this.stop();
 		return;

@@ -7,34 +7,17 @@
 			</span>
 		</div>
 		<div class="contenido">
+
+		{{#each secciones}}
 			<div class="seccion">
-				<span id="rojo">CA</span>
+				<span style="background-color: {{color}}">CA</span>
 				<div class="descripcion">
-					<h3>Calidad</h3>
-					<p>Descripcion</p>
+					<h3>{{nombre}}</h3>
+					<p>{{descripcion}}</p>
 				</div>
 			</div>
-			<div class="seccion">
-				<span id="azul">SE</span>
-				<div class="descripcion">
-					<h3>Seguridad & Salud Ocupacional</h3>
-					<p>Descripcion</p>
-				</div>
-			</div>
-			<div class="seccion">
-				<span id="verde">BA</span>
-				<div class="descripcion">
-					<h3>BASC</h3>
-					<p>Descripcion</p>
-				</div>
-			</div>
-			<div class="seccion">
-				<span id="amarillo">MA</span>
-				<div class="descripcion">
-					<h3>Medio Ambiente</h3>
-					<p>Descripcion</p>
-				</div>
-			</div>
+		{{/each}}
+			
 		</div>
 		<div class="footer">
 			<h5>Powered by INDUSTEC</h5>

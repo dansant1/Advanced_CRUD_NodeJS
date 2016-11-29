@@ -99,8 +99,8 @@ body, html {
 
 .seccion span {
 	display: block;
-	width: 40px;
-	height: 40px;
+	width: 90px;
+	height: 90px;
 	border-radius: 70%;
 	background: #445274;
 	text-align: center;
@@ -138,6 +138,20 @@ body, html {
 	margin-left: 15px;
 	margin-bottom: 5px;
 	color: #445274;
+}
+
+.parte img {
+	display: block;
+	width: 89%;
+	border-radius: 5px;
+	margin: 5px auto;
+}
+
+.parte video {
+	display: block;
+	width: 89%;
+	border-radius: 5px;
+	margin: 5px auto;
 }
 
 .atras {
@@ -186,8 +200,8 @@ body, html {
 .wrap-login-form input {
 	display: block;
 	margin: 10px auto;
-	width: 80%;
-	height: 30px;
+	width: 89%;
+	height: 48px;
 	border-radius: 45px;
 	border: none;
 	background: white;

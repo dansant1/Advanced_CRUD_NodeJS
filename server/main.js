@@ -3,16 +3,9 @@ Meteor.methods({
 
 		var id = Accounts.createUser({
     		email: datos.email,
-    		password: datos,
-
-  		);
-
-
-
+    		password: datos.password
+      });
     	Roles.addUsersToRoles(id, 'admin', 'default-group');
-
-
-
 	},
 	'agregarUsuarioSinTipo': function (datos) {
 		var id = Accounts.createUser({
@@ -21,7 +14,7 @@ Meteor.methods({
     		profile: {
     			tipo: datos.tipo
     		}
-  		);
+    });
 
   		let tipoId = Tipos.insert({
   			createdAt: new Date(),
@@ -39,7 +32,7 @@ Meteor.methods({
   		});
 
   		Usuarios.insert({
-  			email. datos.email,
+  			email: datos.email,
   			tipo: datos.tipo,
   			tipoId: tipoId
   		});
@@ -49,13 +42,13 @@ Meteor.methods({
     		email: datos.email,
     		password: datos.password,
     		profile: {
-    			tipo: datos.tipo
+    			tipo: datos.tipo,
     			tipoId: datos.tipoId
     		}
-  		);
+  		});
 
   		Usuarios.insert({
-  			email. datos.email,
+  			email: datos.email,
   			tipo: datos.tipo,
   			tipoId: datos.tipoId
   		});
@@ -63,11 +56,12 @@ Meteor.methods({
 	},
 	'agregarSeccion': function (datos) {
 		if (this.userId) {
-			Seccion.insert({
+			Secciones.insert({
 				nombre: datos.nombre,
 				descripcion: datos.descripcion,
 				color: datos.color,
-				tipoId: datos.tipoId
+				tipoId: datos.tipoId,
+        tipo: datos.tipo
 			});
 		} else {
 			return;
@@ -75,11 +69,15 @@ Meteor.methods({
 	},
 	'agregarSubseccion': function (datos) {
 		if (this.userId) {
-			Subseccion.insert({
+			var id = Subseccion.insert({
 				titulo: datos.titulo,
 				descripcion: datos.descripcion,
 				seccionId: datos.seccionId
 			});
+
+      return {
+        id: id
+      }
 		} else {
 			return;
 		}

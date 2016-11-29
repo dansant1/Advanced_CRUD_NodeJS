@@ -25,3 +25,6 @@ twbs:bootstrap
 accounts-password
 alanning:roles
 accounts-base
+cfs:standard-packages
+cfs:gridfs
+risul:bootstrap-colorpicker
